@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Part12FirebaseAuth.iml" filepath="$PROJECT_DIR$/.idea/Part12FirebaseAuth.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cis3334-part12-firebase-auth-lhall4-CSS.iml" filepath="$PROJECT_DIR$/cis3334-part12-firebase-auth-lhall4-CSS.iml" />
     </modules>
   </component>
 </project>
