@@ -46,28 +46,24 @@ public class MainActivity extends AppCompatActivity {
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("CIS3334", "normal login ");
                 signIn(editTextEmail.getText().toString(), editTextPassword.getText().toString());
             }
         });
 
         buttonCreateLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("CIS3334", "Create Account ");
                 createAccount(editTextEmail.getText().toString(), editTextPassword.getText().toString());
             }
         });
 
         buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("CIS3334", "Google login ");
                 googleSignIn();
             }
         });
 
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("CIS3334", "Logging out - signOut ");
                 signOut();
             }
         });
@@ -82,21 +78,18 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
             //user signed in
-            Log.d("CIS3334", "OnAuthStatusChanged:signed_in: " + currentUser.getUid());
-            Toast.makeText(MainActivity.this, "User Signed In", Toast.LENGTH_LONG);
             textViewStatus.setText("Signed In");
         }
         else {
             //user signed out
-            Log.d("CIS3334", "OnAuthStatusChanged:signed_out");
-            Toast.makeText(MainActivity.this, "User Signed Out", Toast.LENGTH_LONG);
             textViewStatus.setText("Signed Out");
 
         }
-        //updateUI(currentUser);
     }
 
-
+    /**
+     * Method to create an account for a user.
+     */
     private void createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -122,6 +115,10 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Method to process the sign in of the user.
+     */
+
     private void signIn(String email, String password){
 
         mAuth.signInWithEmailAndPassword(email, password)
@@ -130,15 +127,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("CIS3334", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
                             textViewStatus.setText("Signed In");
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w("CIS3334", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
                             textViewStatus.setText("Sign In Failed");
                             //updateUI(null);
                         }
@@ -148,7 +141,9 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
-
+    /**
+     * Method to process the sign out of the user
+     */
     private void signOut () {
         mAuth.signOut();
         textViewStatus.setText("Signed Out");
